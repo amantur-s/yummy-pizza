@@ -1,19 +1,21 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
-function Sorting() {
+function Sorting({ sortingBy, setSortingBy }) {
   const [isShow, setIsShow] = useState(false);
-  const [selected, setSelected] = useState(0);
 
-  const sortList = ["популярности", "цене", "алфавиту"];
+  const sortList = [
+    { name: "популярности (убыванию) ", property: "rating" },
+    { name: "популярности (возрастанию) ", property: "rating+" },
+    { name: "цене (убыванию) ", property: "price" },
+    { name: "цене (возрастанию) ", property: "price+" },
+    { name: "названию (убыванию) ", property: "title" },
+    { name: "названию (возрастанию) ", property: "title+" },
+  ];
 
-  const onClickSorting = (index) => {
-    setSelected(index);
+  const onClickSorting = (obj) => {
+    setSortingBy(obj);
     setIsShow(false);
   };
-
-  useEffect(() => {
-    console.log();
-  }, []);
 
   return (
     <div className="sort">
@@ -31,18 +33,18 @@ function Sorting() {
           />
         </svg>
         <b>Сортировка по:</b>
-        <span onClick={() => setIsShow(!isShow)}> {sortList[selected]} </span>
+        <span onClick={() => setIsShow(!isShow)}> {sortingBy.name} </span>
       </div>
       {isShow && (
         <div className="sort__popup">
           <ul>
-            {sortList.map((list, index) => (
+            {sortList.map((obj, index) => (
               <li
-                onClick={() => onClickSorting(index)}
-                className={selected === index ? "active" : ""}
-                key={list}
+                onClick={() => onClickSorting(obj)}
+                className={sortingBy.property === obj.property ? "active" : ""}
+                key={index}
               >
-                {list}
+                {obj.name}
               </li>
             ))}
           </ul>

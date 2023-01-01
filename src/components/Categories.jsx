@@ -5,7 +5,6 @@ const category = [
   { name: "Вегетарианская" },
   { name: "Гриль" },
   { name: "Острые" },
-  { name: "Закрытые" },
 ];
 
 function Categories({ categoryId, setCategoryId }) {

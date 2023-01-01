@@ -5,6 +5,10 @@
   text-align: center;
   margin-bottom: 65px;
 
+  p {
+    font-size: 16px;
+  }
+
   &:not(:nth-of-type(4n)) {
     margin-right: 35px;
   }
@@ -17,7 +21,6 @@
     font-size: 20px;
     font-weight: 900;
     letter-spacing: 1%;
-    margin-bottom: 20px;
   }
 
   &__selector {
@@ -26,6 +29,7 @@
     border-radius: 25px;
     flex-direction: column;
     padding: 6px;
+    margin-top: 5px;
 
     ul {
       display: flex;
@@ -44,10 +48,10 @@
         @include noselect();
         &.active {
           background: #ffffff;
-          border: 1px solid orangered;
-          box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.04);
+          box-shadow: 0px 2px 4px rgba(1, 1, 1, 0.08);
           border-radius: 20px;
           cursor: auto;
+          color: orangered;
         }
       }
     }

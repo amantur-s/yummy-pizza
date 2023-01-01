@@ -1,19 +1,22 @@
 import React from "react";
-import pizzalogo from "../components/assets/img/pizzaLogo.svg";
-import Cart from "./Cart";
+import { NavLink } from "react-router-dom";
+import pizzalogo from "../assets/img/pizzaLogo.svg";
+import CartButton from "./CartButton";
 
 function Header() {
   return (
     <div className="header">
       <div className="container">
-        <div className="header__logo">
-          <img width="38" src={pizzalogo} alt="" />
-          <div>
-            <h1>Yummy Pizza</h1>
-            <p>самая вкусная пицца во вселенной</p>
+        <NavLink to="/">
+          <div className="header__logo">
+            <img width="38" src={pizzalogo} alt="" />
+            <div>
+              <h1>Yummy Pizza</h1>
+              <p>самая вкусная пицца во вселенной</p>
+            </div>
           </div>
-        </div>
-        <Cart />
+        </NavLink>
+        <CartButton />
       </div>
     </div>
   );
