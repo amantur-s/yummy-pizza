@@ -1,7 +1,11 @@
-import { useState } from "react";
+import { useState } from "react"
+import { useDispatch, useSelector } from "react-redux"
+import { setSorting } from "../store/slices/filterSlice"
 
-function Sorting({ sortingBy, setSortingBy }) {
-  const [isShow, setIsShow] = useState(false);
+function Sorting() {
+  const { sort } = useSelector(state => state.filter)
+  const dispatch = useDispatch()
+  const [isShow, setIsShow] = useState(false)
 
   const sortList = [
     { name: "популярности (убыванию) ", property: "rating" },
@@ -10,12 +14,12 @@ function Sorting({ sortingBy, setSortingBy }) {
     { name: "цене (возрастанию) ", property: "price+" },
     { name: "названию (убыванию) ", property: "title" },
     { name: "названию (возрастанию) ", property: "title+" },
-  ];
+  ]
 
-  const onClickSorting = (obj) => {
-    setSortingBy(obj);
-    setIsShow(false);
-  };
+  const sortingHandler = obj => {
+    dispatch(setSorting(obj))
+    setIsShow(false)
+  }
 
   return (
     <div className="sort">
@@ -33,15 +37,15 @@ function Sorting({ sortingBy, setSortingBy }) {
           />
         </svg>
         <b>Сортировка по:</b>
-        <span onClick={() => setIsShow(!isShow)}> {sortingBy.name} </span>
+        <span onClick={() => setIsShow(!isShow)}> {sort.name} </span>
       </div>
       {isShow && (
         <div className="sort__popup">
           <ul>
             {sortList.map((obj, index) => (
               <li
-                onClick={() => onClickSorting(obj)}
-                className={sortingBy.property === obj.property ? "active" : ""}
+                onClick={() => sortingHandler(obj)}
+                className={sort.property === obj.property ? "active" : ""}
                 key={index}
               >
                 {obj.name}
@@ -51,7 +55,7 @@ function Sorting({ sortingBy, setSortingBy }) {
         </div>
       )}
     </div>
-  );
+  )
 }
 
-export default Sorting;
+export default Sorting

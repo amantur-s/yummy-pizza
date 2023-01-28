@@ -1,9 +1,9 @@
-import { Route, Routes } from "react-router-dom";
-import Header from "./components/Header";
-import Cart from "./pages/Cart";
-import EmptyCart from "./pages/EmptyCart";
-import Main from "./pages/Main";
-import "./scss/app.scss";
+import { Route, Routes } from "react-router-dom"
+import Header from "./components/Header"
+import Cart from "./pages/Cart"
+import EmptyCart from "./pages/EmptyCart"
+import Main from "./pages/Main"
+import "./scss/app.scss"
 
 function App() {
   return (
@@ -21,7 +21,7 @@ function App() {
         </div>
       </div>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App

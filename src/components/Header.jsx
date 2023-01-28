@@ -2,6 +2,7 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import pizzalogo from "../assets/img/pizzaLogo.svg";
 import CartButton from "./CartButton";
+import Search from "./Search/Search";
 
 function Header() {
   return (
@@ -16,6 +17,7 @@ function Header() {
             </div>
           </div>
         </NavLink>
+        <Search />
         <CartButton />
       </div>
     </div>
