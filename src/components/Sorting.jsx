@@ -1,25 +1,38 @@
-import { useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { setSorting } from "../store/slices/filterSlice"
 
+export const sortList = [
+  { name: "популярности (убыванию) ", property: "rating" },
+  { name: "популярности (возрастанию) ", property: "-rating" },
+  { name: "цене (убыванию) ", property: "price" },
+  { name: "цене (возрастанию) ", property: "-price" },
+  { name: "названию (убыванию) ", property: "title" },
+  { name: "названию (возрастанию) ", property: "-title" },
+]
+
 function Sorting() {
-  const { sort } = useSelector(state => state.filter)
+  const { sort } = useSelector((state) => state.filter)
   const dispatch = useDispatch()
   const [isShow, setIsShow] = useState(false)
+  const popupRef = useRef()
 
-  const sortList = [
-    { name: "популярности (убыванию) ", property: "rating" },
-    { name: "популярности (возрастанию) ", property: "rating+" },
-    { name: "цене (убыванию) ", property: "price" },
-    { name: "цене (возрастанию) ", property: "price+" },
-    { name: "названию (убыванию) ", property: "title" },
-    { name: "названию (возрастанию) ", property: "title+" },
-  ]
-
-  const sortingHandler = obj => {
+  const sortingHandler = (obj) => {
     dispatch(setSorting(obj))
     setIsShow(false)
   }
+
+  useEffect(() => {
+    const closePopupHandle = (event) => {
+      if (event.composedPath()[0] !== popupRef.current) {
+        setIsShow(false)
+      }
+    }
+    document.body.addEventListener("click", closePopupHandle)
+    return () => {
+      document.body.removeEventListener("click", closePopupHandle)
+    }
+  }, [])
 
   return (
     <div className="sort">
@@ -37,7 +50,9 @@ function Sorting() {
           />
         </svg>
         <b>Сортировка по:</b>
-        <span onClick={() => setIsShow(!isShow)}> {sort.name} </span>
+        <span ref={popupRef} onClick={() => setIsShow(!isShow)}>
+          {sort.name}
+        </span>
       </div>
       {isShow && (
         <div className="sort__popup">
