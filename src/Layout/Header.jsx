@@ -1,8 +1,8 @@
-import React from "react";
-import { NavLink } from "react-router-dom";
-import pizzalogo from "../assets/img/pizzaLogo.svg";
-import CartButton from "./CartButton";
-import Search from "./Search/Search";
+import React from "react"
+import { NavLink } from "react-router-dom"
+import pizzalogo from "../assets/img/pizzaLogo.svg"
+import CartButton from "../components/CartButton"
+import Search from "../components/Search/Search"
 
 function Header() {
   return (
@@ -21,7 +21,7 @@ function Header() {
         <CartButton />
       </div>
     </div>
-  );
+  )
 }
 
-export default Header;
+export default Header

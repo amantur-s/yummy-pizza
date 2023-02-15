@@ -1,12 +1,10 @@
-import React from "react";
-import emptylogo from "../assets/img/empty-cart.png";
+import React from "react"
+import emptylogo from "../assets/img/empty-cart.png"
 
 function EmptyCart() {
   return (
     <div className="cart cart--empty">
-      <h2>
-        Корзина пустая <icon> 😕 </icon>
-      </h2>
+      <h2>Корзина пустая 😕</h2>
       <p>
         Вероятней всего, вы не заказывали ещё пиццу.
         <br />
@@ -17,7 +15,7 @@ function EmptyCart() {
         <span> Вернуться назад </span>
       </a>
     </div>
-  );
+  )
 }
 
-export default EmptyCart;
+export default EmptyCart

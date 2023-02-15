@@ -1,10 +1,29 @@
-import { useState } from "react";
+import { useState } from "react"
+import { useDispatch, useSelector } from "react-redux"
+import { addItem } from "../../store/slices/cartSlice"
 
-function Card({ title, imageUrl, price, sizes, types, rating }) {
-  const [activeSize, setActiveSize] = useState(0);
-  const [activeType, setActiveType] = useState(0);
+function Card({ title, imageUrl, price, sizes, types, rating, id }) {
+  const [activeSize, setActiveSize] = useState(0)
+  const [activeType, setActiveType] = useState(0)
+  const itemCount = useSelector((state) =>
+    state.cart.items.find((obj) => obj.id === id)
+  )
+  const dispatch = useDispatch()
+  const count = itemCount ? itemCount.count : 0
 
-  const typesName = ["Тонкое", "Традиционное"];
+  const typesName = ["Тонкое", "Традиционное"]
+
+  const addItemHandler = () => {
+    const item = {
+      id,
+      title,
+      price,
+      imageUrl,
+      types: typesName[activeType],
+      sizes: sizes[activeSize],
+    }
+    dispatch(addItem(item))
+  }
 
   return (
     <div className="pizza-block">
@@ -37,7 +56,10 @@ function Card({ title, imageUrl, price, sizes, types, rating }) {
       </div>
       <div className="pizza-block__bottom">
         <div className="pizza-block__price"> {price} сом </div>
-        <div className="button button--outline button--add">
+        <button
+          onClick={addItemHandler}
+          className="button button--outline button--add"
+        >
           <svg
             width="12"
             height="12"
@@ -51,10 +73,11 @@ function Card({ title, imageUrl, price, sizes, types, rating }) {
             />
           </svg>
           <span> Добавить </span>
-        </div>
+          {count > 0 && <i> {count} </i>}
+        </button>
       </div>
     </div>
-  );
+  )
 }
 
-export default Card;
+export default Card

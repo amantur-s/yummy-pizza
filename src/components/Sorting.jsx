@@ -29,9 +29,7 @@ function Sorting() {
       }
     }
     document.body.addEventListener("click", closePopupHandle)
-    return () => {
-      document.body.removeEventListener("click", closePopupHandle)
-    }
+    return () => document.body.removeEventListener("click", closePopupHandle)
   }, [])
 
   return (
