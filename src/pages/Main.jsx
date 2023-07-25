@@ -1,20 +1,18 @@
-import axios from "axios"
 import qs from "qs"
-import React, { useEffect, useRef, useState } from "react"
+import React, { useEffect, useRef } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useNavigate } from "react-router-dom"
-import Card from "../components/Card/index"
 import Skeleton from "../components/Card/Skeleton"
+import Card from "../components/Card/index"
 import Categories from "../components/Categories"
 import Sorting, { sortList } from "../components/Sorting"
 import "../scss/app.scss"
 import { setCategory, setParams } from "../store/slices/filterSlice"
-import { setItems } from "../store/slices/itemsSlice"
+import { fetchItems } from "../store/slices/itemsSlice.js"
 
 function Main() {
   const { categoryId, searchValue, sort } = useSelector((state) => state.filter)
-  const items = useSelector((state) => state.items.data)
-  const [isLoading, setIsLoading] = useState(true)
+  const { data, status } = useSelector((state) => state.items)
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const isSearch = useRef(false)
@@ -39,26 +37,23 @@ function Main() {
   }, [dispatch])
 
   useEffect(() => {
-    if (!isSearch.current) {
-      setIsLoading(true)
-      const category = categoryId ? `category=${categoryId}` : ""
-      const sortBy = sort.property.replace("-", "")
-      const order = sort.property.includes("-") ? "asc" : "desc"
+    const pizzas = async () => {
+      if (!isSearch.current) {
+        const category = categoryId ? `category=${categoryId}` : ""
+        const sortBy = sort.property.replace("-", "")
+        const order = sort.property.includes("-") ? "asc" : "desc"
 
-      axios
-        .get(
-          `https://639a109f16b0fdad77531c44.mockapi.io/api/items?${category}&sortBy=${sortBy}&order=${order}`
+        dispatch(
+          fetchItems({
+            category,
+            sortBy,
+            order,
+          })
         )
-        .then((res) => {
-          dispatch(setItems(res.data))
-          setIsLoading(false)
-        })
-        .catch((err) => {
-          console.warn(err)
-          alert("Ошибка при получении данных")
-        })
+      }
+      isSearch.current = false
     }
-    isSearch.current = false
+    pizzas()
   }, [categoryId, sort, dispatch])
 
   useEffect(() => {
@@ -73,6 +68,11 @@ function Main() {
   }, [categoryId, sort, dispatch, navigate])
 
   const skeleton = [...new Array(8)].map((_, index) => <Skeleton key={index} />)
+  const pizzas = data
+    .filter((obj) =>
+      obj.title.toLowerCase().includes(searchValue.toLowerCase())
+    )
+    .map((obj) => <Card key={obj.id} {...obj} />)
 
   return (
     <>
@@ -82,13 +82,11 @@ function Main() {
       </div>
       <h2 className="content__title"> Все пиццы </h2>
       <div className="content__items">
-        {isLoading
-          ? skeleton
-          : items
-              .filter((obj) =>
-                obj.title.toLowerCase().includes(searchValue.toLowerCase())
-              )
-              .map((obj) => <Card key={obj.id} {...obj} />)}
+        {status === "error" ? (
+          alert("Ошибка при получении данных!")
+        ) : (
+          <> {status === "loading" ? skeleton : pizzas} </>
+        )}
       </div>
     </>
   )
