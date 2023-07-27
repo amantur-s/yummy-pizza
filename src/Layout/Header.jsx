@@ -1,8 +1,10 @@
 import React from "react"
-import { NavLink } from "react-router-dom"
+import { NavLink, useLocation } from "react-router-dom"   //react-hooks/rules-of-hooks
 import pizzalogo from "../assets/img/pizzaLogo.svg"
 import CartButton from "../components/CartButton"
 import Search from "../components/Search/Search"
+
+const location = useLocation()
 
 function Header() {
   return (
@@ -18,7 +20,7 @@ function Header() {
           </div>
         </NavLink>
         <Search />
-        <CartButton />
+        {location.pathname === "/cart" && <CartButton />}
       </div>
     </div>
   )
