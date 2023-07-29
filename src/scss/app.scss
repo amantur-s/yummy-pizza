@@ -308,3 +308,21 @@ body {
     }
   }
 }
+
+.notfound {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 50px;
+  padding: 100px;
+  h2{
+    font-size: 35px;
+  }
+  p{
+    font-size: 22px;
+  }
+  .button{
+    width: 240px;
+    height: 45px;
+  }
+}

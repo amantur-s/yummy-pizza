@@ -17,7 +17,6 @@ function FullPizza() {
         alert("Упс, пицца не найдена =(")
       }
     }
-
     fetchPizzaById()
   }, [id])
 
@@ -28,8 +27,8 @@ function FullPizza() {
   return (
     <div className="full-pizza">
       <img src={pizza.imageUrl} alt={pizza.title} />
-      <h2> {pizza.title} </h2>
-      <h2> {pizza.price} </h2>
+      <h1> {pizza.title} </h1>
+      <h2> {pizza.price} сом </h2>
     </div>
   )
 }
