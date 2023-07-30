@@ -4,6 +4,7 @@ import Cart from "./pages/Cart"
 import FullPizza from "./pages/FullPizza"
 import Main from "./pages/Main"
 import NotFound from "./pages/NotFound"
+import React from "react"
 
 function App() {
   return (
