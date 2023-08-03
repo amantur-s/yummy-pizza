@@ -1,4 +1,3 @@
-import React from "react"
 import { NavLink } from "react-router-dom" //react-hooks/rules-of-hooks
 import pizzalogo from "../assets/img/pizzaLogo.svg"
 import CartButton from "../components/CartButton"

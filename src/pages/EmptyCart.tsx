@@ -1,4 +1,3 @@
-import React from "react"
 import emptylogo from "../assets/img/empty-cart.png"
 
 function EmptyCart() {

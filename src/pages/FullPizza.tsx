@@ -25,7 +25,7 @@ const FullPizza: React.FC = () => {
   }, [id])
 
   if (!pizza) {
-    return <> Loading </>
+    return <> Loading... </>
   }
 
   return (
