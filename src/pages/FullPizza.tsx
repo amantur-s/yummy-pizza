@@ -1,10 +1,14 @@
 import axios from "axios"
-import { useEffect, useState } from "react"
+import React, { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
 
-function FullPizza() {
+const FullPizza: React.FC = () => {
   const { id } = useParams()
-  const [pizza, setPizza] = useState()
+  const [pizza, setPizza] = useState<{
+    imageUrl: string
+    title: string
+    price: number
+  }>()
 
   useEffect(() => {
     async function fetchPizzaById() {
@@ -21,7 +25,7 @@ function FullPizza() {
   }, [id])
 
   if (!pizza) {
-    return "Loading . . ."
+    return <> Loading </>
   }
 
   return (
