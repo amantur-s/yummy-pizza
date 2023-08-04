@@ -1,8 +1,13 @@
 import { useEffect, useRef, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { setSorting } from "../store/slices/filterSlice"
+import { filter, setSorting } from "../store/slices/filterSlice"
 
-export const sortList = [
+type sortItem = {
+  name: string
+  property: string
+}
+
+export const sortList: sortItem[] = [
   { name: "популярности (убыванию) ", property: "rating" },
   { name: "популярности (возрастанию) ", property: "-rating" },
   { name: "цене (убыванию) ", property: "price" },
@@ -12,18 +17,18 @@ export const sortList = [
 ]
 
 function Sorting() {
-  const { sort } = useSelector((state) => state.filter)
+  const { sort } = useSelector(filter)
   const dispatch = useDispatch()
   const [isShow, setIsShow] = useState(false)
-  const popupRef = useRef()
+  const popupRef = useRef<HTMLSpanElement>(null)
 
-  const sortingHandler = (obj) => {
+  const sortingHandler = (obj: sortItem) => {
     dispatch(setSorting(obj))
     setIsShow(false)
   }
 
   useEffect(() => {
-    const closePopupHandle = (event) => {
+    const closePopupHandle = (event: any) => {
       if (event.composedPath()[0] !== popupRef.current) {
         setIsShow(false)
       }

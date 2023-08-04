@@ -2,11 +2,11 @@ import React from "react"
 import { DebounceInput } from "react-debounce-input"
 import { useDispatch, useSelector } from "react-redux"
 import clearIcon from "../../assets/icons/clear-icon.svg"
-import { setSearch } from "../../store/slices/filterSlice"
+import { filter, setSearch } from "../../store/slices/filterSlice"
 import styles from "./Search.module.scss"
 
 function Search() {
-  const { searchValue } = useSelector(state => state.filter)
+  const { searchValue } = useSelector(filter)
   const dispatch = useDispatch()
   const inputRef = React.useRef()
 

@@ -1,13 +1,22 @@
-import React from "react";
+import React from "react"
+
 const category = [
   { name: "Все" },
   { name: "Мясные" },
   { name: "Вегетарианская" },
   { name: "Гриль" },
   { name: "Острые" },
-];
+]
 
-function Categories({ categoryId, setCategoryId }) {
+type CategoriesProps = {
+  categoryId: number
+  setCategoryId: any
+}
+
+const Categories: React.FC<CategoriesProps> = ({
+  categoryId,
+  setCategoryId,
+}) => {
   return (
     <div className="categories">
       <ul>
@@ -22,7 +31,7 @@ function Categories({ categoryId, setCategoryId }) {
         ))}
       </ul>
     </div>
-  );
+  )
 }
 
-export default Categories;
+export default Categories

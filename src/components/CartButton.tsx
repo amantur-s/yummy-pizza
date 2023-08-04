@@ -1,10 +1,13 @@
-import React from "react"
 import { useSelector } from "react-redux"
 import { NavLink } from "react-router-dom"
+import { CartItems } from "../store/slices/cartSlice"
 
 function Cart() {
-  const { items, totalPrice } = useSelector((state) => state.cart)
-  const totoalCount = items.reduce((sum, item) => sum + item.count, 0)
+  const { items, totalPrice } = useSelector(CartItems)
+  const totoalCount = items.reduce(
+    (sum: number, item: any) => sum + item.count,
+    0
+  )
   return (
     <div className="header__cart">
       <NavLink to="/cart" className="button button--cart">

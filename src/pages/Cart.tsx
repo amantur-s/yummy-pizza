@@ -1,12 +1,14 @@
-import React from "react"
 import { useDispatch, useSelector } from "react-redux"
 import CartItem from "../components/CartItem"
-import { removeAll } from "../store/slices/cartSlice"
+import { CartItems, removeAll } from "../store/slices/cartSlice"
 import EmptyCart from "./EmptyCart"
 
-function CartPage() {
-  const { items, totalPrice } = useSelector((state) => state.cart)
-  const totalCount = items.reduce((sum, item) => sum + item.count, 0)
+const CartPage = () => {
+  const { items, totalPrice } = useSelector(CartItems)
+  const totalCount = items.reduce(
+    (sum: number, item: any) => sum + item.count,
+    0
+  )
   const dispatch = useDispatch()
 
   const clearHandler = () => {
@@ -93,7 +95,7 @@ function CartPage() {
             </button>
           </div>
           <div className="content__items">
-            {items.map((obj) => (
+            {items.map((obj: any) => (
               <CartItem key={obj.id} {...obj} />
             ))}
           </div>
