@@ -1,6 +1,6 @@
 import React from "react"
 
-function EmptyCart() {
+const EmptyCart: React.FC = () => {
   return (
     <div className="notfound">
       <h2> Ничего не найдено 😕</h2>

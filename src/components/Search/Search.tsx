@@ -2,21 +2,21 @@ import React from "react"
 import { DebounceInput } from "react-debounce-input"
 import { useDispatch, useSelector } from "react-redux"
 import clearIcon from "../../assets/icons/clear-icon.svg"
-import { filter, setSearch } from "../../store/slices/filterSlice"
+import { selectFilter, setSearch } from "../../store/slices/filterSlice"
 import styles from "./Search.module.scss"
 
-function Search() {
-  const { searchValue } = useSelector(filter)
+const Search: React.FC = () => {
+  const { searchValue } = useSelector(selectFilter)
   const dispatch = useDispatch()
-  const inputRef = React.useRef()
+  const inputRef = React.useRef<HTMLInputElement>(null)
 
   const clearFocus = () => {
     dispatch(setSearch(""))
-    inputRef.current.focus()
+    inputRef.current?.focus()
   }
 
-  const inputHandler = e => {
-    dispatch(setSearch(e.target.value))
+  const inputHandler = (event: any) => {
+    dispatch(setSearch(event.target.value))
   }
 
   return (

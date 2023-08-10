@@ -5,7 +5,7 @@ import "react-toastify/dist/ReactToastify.css"
 import "../scss/app.scss"
 import Header from "./Header"
 
-function MainLayout() {
+const MainLayout: React.FC = () => {
   return (
     <div className="App">
       <ToastContainer position="top-right" autoClose={1500} />

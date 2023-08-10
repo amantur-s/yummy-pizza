@@ -29,7 +29,7 @@ const filterSlice = createSlice({
   },
 })
 
-export const filter = (state) => state.filter
+export const selectFilter = (state) => state.filter
 
 export const { setCategory, setSorting, setSearch, setParams } =
   filterSlice.actions

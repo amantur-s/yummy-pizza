@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { filter, setSorting } from "../store/slices/filterSlice"
+import { selectFilter, setSorting } from "../store/slices/filterSlice"
+import React from "react"
 
 type sortItem = {
   name: string
@@ -16,8 +17,8 @@ export const sortList: sortItem[] = [
   { name: "названию (возрастанию) ", property: "-title" },
 ]
 
-function Sorting() {
-  const { sort } = useSelector(filter)
+const Sorting: React.FC = () => {
+  const { sort } = useSelector(selectFilter)
   const dispatch = useDispatch()
   const [isShow, setIsShow] = useState(false)
   const popupRef = useRef<HTMLSpanElement>(null)

@@ -1,9 +1,10 @@
+import React from "react"
 import { useSelector } from "react-redux"
 import { NavLink } from "react-router-dom"
-import { CartItems } from "../store/slices/cartSlice"
+import { selectCart } from "../store/slices/cartSlice"
 
-function Cart() {
-  const { items, totalPrice } = useSelector(CartItems)
+const CartButton: React.FC = () => {
+  const { items, totalPrice } = useSelector(selectCart)
   const totoalCount = items.reduce(
     (sum: number, item: any) => sum + item.count,
     0
@@ -48,4 +49,4 @@ function Cart() {
   )
 }
 
-export default Cart
+export default CartButton

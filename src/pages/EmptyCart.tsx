@@ -1,6 +1,7 @@
 import emptylogo from "../assets/img/empty-cart.png"
+import React from "react"
 
-function EmptyCart() {
+const EmptyCart: React.FC = () => {
   return (
     <div className="cart cart--empty">
       <h2>Корзина пустая 😕</h2>

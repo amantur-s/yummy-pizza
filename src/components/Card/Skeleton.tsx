@@ -1,7 +1,7 @@
-import React from "react";
-import ContentLoader from "react-content-loader";
+import React from "react"
+import ContentLoader from "react-content-loader"
 
-function Skeleton(props) {
+const Skeleton: React.FC = (props) => {
   return (
     <ContentLoader
       className="pizza-block"
@@ -20,7 +20,7 @@ function Skeleton(props) {
       <rect x="146" y="406" rx="6" ry="6" width="110" height="42" />
       <rect x="13" y="274" rx="11" ry="11" width="230" height="17" />
     </ContentLoader>
-  );
+  )
 }
 
-export default Skeleton;
+export default Skeleton

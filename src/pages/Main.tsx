@@ -1,18 +1,23 @@
 import qs from "qs"
-import { useEffect, useRef } from "react"
+import React, { useEffect, useRef } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useNavigate } from "react-router-dom"
 import Skeleton from "../components/Card/Skeleton"
 import Card from "../components/Card/index"
-import Categories from "../components/Categories.tsx"
+import Categories from "../components/Categories"
 import Sorting, { sortList } from "../components/Sorting"
 import "../scss/app.scss"
-import { setCategory, setParams } from "../store/slices/filterSlice"
+import { selectCart } from "../store/slices/cartSlice"
+import {
+  selectFilter,
+  setCategory,
+  setParams,
+} from "../store/slices/filterSlice"
 import { fetchItems } from "../store/slices/itemsSlice.js"
 
-function Main() {
-  const { categoryId, searchValue, sort } = useSelector((state) => state.filter)
-  const { data, status } = useSelector((state) => state.items)
+const Main: React.FC = () => {
+  const { categoryId, searchValue, sort } = useSelector(selectFilter)
+  const { data, status } = useSelector(selectCart)
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const isSearch = useRef(false)

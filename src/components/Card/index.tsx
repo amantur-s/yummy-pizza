@@ -1,14 +1,31 @@
-import { useState } from "react"
+import React, { useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { Link } from "react-router-dom"
-import { addItem } from "../../store/slices/cartSlice"
+import { addItem, selectCartById } from "../../store/slices/cartSlice"
 
-function Card({ title, imageUrl, price, sizes, types, rating, id }) {
+type CardProps = {
+  title: string
+  imageUrl: string
+  price: number
+  sizes: number[]
+  types: number[]
+  rating: number
+  id: string
+}
+
+const Card: React.FC<CardProps> = ({
+  title,
+  imageUrl,
+  price,
+  sizes,
+  types,
+  rating,
+  id,
+}) => {
   const [activeSize, setActiveSize] = useState(0)
   const [activeType, setActiveType] = useState(0)
-  const itemCount = useSelector((state) =>
-    state.cart.items.find((obj) => obj.id === id)
-  )
+
+  const itemCount = useSelector(selectCartById(id))
   const dispatch = useDispatch()
   const count = itemCount ? itemCount.count : 0
 
