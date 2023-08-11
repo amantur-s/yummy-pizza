@@ -1,11 +1,13 @@
-import { useEffect, useRef, useState } from "react"
+import React, { useEffect, useRef, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { selectFilter, setSorting } from "../store/slices/filterSlice"
-import React from "react"
 
 type sortItem = {
   name: string
   property: string
+}
+type PopupClick = MouseEvent & {
+  composedPath: Node[]
 }
 
 export const sortList: sortItem[] = [
@@ -29,8 +31,9 @@ const Sorting: React.FC = () => {
   }
 
   useEffect(() => {
-    const closePopupHandle = (event: any) => {
-      if (event.composedPath()[0] !== popupRef.current) {
+    const closePopupHandle = (event: MouseEvent) => {
+      const _event = event as PopupClick
+      if (_event.composedPath()[0] !== popupRef.current) {
         setIsShow(false)
       }
     }
