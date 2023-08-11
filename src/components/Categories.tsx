@@ -10,7 +10,7 @@ const category = [
 
 type CategoriesProps = {
   categoryId: number
-  setCategoryId: any
+  setCategoryId: (idx: number) => void
 }
 
 const Categories: React.FC<CategoriesProps> = ({

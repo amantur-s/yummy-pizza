@@ -7,24 +7,23 @@ import Card from "../components/Card/index"
 import Categories from "../components/Categories"
 import Sorting, { sortList } from "../components/Sorting"
 import "../scss/app.scss"
-import { selectCart } from "../store/slices/cartSlice"
 import {
   selectFilter,
   setCategory,
   setParams,
 } from "../store/slices/filterSlice"
-import { fetchItems } from "../store/slices/itemsSlice.js"
+import { fetchItems, selectItems } from "../store/slices/itemsSlice.js"
 
 const Main: React.FC = () => {
   const { categoryId, searchValue, sort } = useSelector(selectFilter)
-  const { data, status } = useSelector(selectCart)
+  const { data, status } = useSelector(selectItems)
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const isSearch = useRef(false)
   const isMounted = useRef(false)
 
-  const categoryHandler = (id) => {
-    dispatch(setCategory(id))
+  const categoryHandler = (idx: number) => {
+    dispatch(setCategory(idx))
   }
 
   useEffect(() => {
@@ -49,6 +48,7 @@ const Main: React.FC = () => {
         const order = sort.property.includes("-") ? "asc" : "desc"
 
         dispatch(
+          // @ts-ignore
           fetchItems({
             category,
             sortBy,
@@ -74,10 +74,10 @@ const Main: React.FC = () => {
 
   const skeleton = [...new Array(8)].map((_, index) => <Skeleton key={index} />)
   const pizzas = data
-    .filter((obj) =>
+    .filter((obj: any) =>
       obj.title.toLowerCase().includes(searchValue.toLowerCase())
     )
-    .map((obj) => <Card key={obj.id} {...obj} />)
+    .map((obj: any) => <Card key={obj.id} {...obj} />)
 
   return (
     <>
