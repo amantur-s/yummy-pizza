@@ -1,7 +1,23 @@
 import { createSlice } from "@reduxjs/toolkit"
 import { toast } from "react-toastify"
+import { RootState } from ".."
 
-const initialState = {
+type CartItem = {
+  title: string
+  imageUrl: string
+  price: number
+  count: number
+  sizes: number
+  types: string
+  id: string
+}
+
+interface CartSliceState {
+  items: CartItem[]
+  totalPrice: number
+}
+
+const initialState: CartSliceState = {
   items: [],
   totalPrice: 0,
 }
@@ -49,10 +65,10 @@ const cartSlice = createSlice({
   },
 })
 
-export const selectCart = (state) => state.cart
-export const selectCartById = (id) => (state) =>
+export const selectCart = (state: RootState) => state.cart
+export const selectCartById = (id: string) => (state: RootState) =>
   state.cart.items.find((obj) => obj.id === id)
 
-export const { addItem, removeItem, removeAll, increase, decrease } =
+export const { addItem, removeItem, removeAll, decrease } =
   cartSlice.actions
 export default cartSlice.reducer

@@ -22,8 +22,8 @@ const Card: React.FC<CardProps> = ({
   rating,
   id,
 }) => {
-  const [activeSize, setActiveSize] = useState(0)
-  const [activeType, setActiveType] = useState(0)
+  const [activeSize, setActiveSize] = useState<number>(0)
+  const [activeType, setActiveType] = useState<number>(0)
 
   const itemCount = useSelector(selectCartById(id))
   const dispatch = useDispatch()
