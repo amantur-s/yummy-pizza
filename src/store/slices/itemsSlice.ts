@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
 import axios from "axios"
+import { RootState } from ".."
 
 export const fetchItems = createAsyncThunk(
   "items/fetchAllItems",
@@ -12,7 +13,22 @@ export const fetchItems = createAsyncThunk(
   }
 )
 
-const initialState = {
+type PizzaItem = {
+  title: string
+  imageUrl: string
+  price: number
+  count: number
+  sizes: number
+  types: string
+  id: string
+}
+
+interface ItemSliceState {
+  data: PizzaItem[]
+  status: "loading" | "succes" | "error"
+}
+
+const initialState: ItemSliceState = {
   data: [],
   status: "loading",
 }
@@ -41,7 +57,7 @@ const itemsSlice = createSlice({
   },
 })
 
-export const selectItems = (state) => state.items
+export const selectItems = (state: RootState) => state.items
 
 export const { setItems } = itemsSlice.actions
 export default itemsSlice.reducer

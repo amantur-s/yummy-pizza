@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit"
 import { toast } from "react-toastify"
 import { RootState } from ".."
 
-type CartItem = {
+export type CartItem = {
   title: string
   imageUrl: string
   price: number
