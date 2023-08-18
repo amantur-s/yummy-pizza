@@ -11,12 +11,12 @@ type PopupClick = MouseEvent & {
 }
 
 export const sortList: sortItem[] = [
-  { name: "популярности (убыванию) ", property: "rating" },
-  { name: "популярности (возрастанию) ", property: "-rating" },
-  { name: "цене (убыванию) ", property: "price" },
-  { name: "цене (возрастанию) ", property: "-price" },
-  { name: "названию (убыванию) ", property: "title" },
-  { name: "названию (возрастанию) ", property: "-title" },
+  { name: "популярности (убыванию)", property: "rating" },
+  { name: "популярности (возрастанию)", property: "-rating" },
+  { name: "цене (убыванию)", property: "price" },
+  { name: "цене (возрастанию)", property: "-price" },
+  { name: "названию (убыванию)", property: "title" },
+  { name: "названию (возрастанию)", property: "-title" },
 ]
 
 const Sorting: React.FC = () => {

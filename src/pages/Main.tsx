@@ -12,7 +12,7 @@ import {
   setCategory,
   setParams,
 } from "../store/slices/filterSlice"
-import { fetchItems, selectItems } from "../store/slices/itemsSlice.js"
+import { fetchItems, selectItems } from "../store/slices/itemsSlice"
 
 const Main: React.FC = () => {
   const { categoryId, searchValue, sort } = useSelector(selectFilter)
@@ -29,11 +29,11 @@ const Main: React.FC = () => {
   useEffect(() => {
     if (window.location.search) {
       const params = qs.parse(window.location.search.substring(1))
-      const sortby = sortList.find((obj) => obj.property === params.property)
+      const sort = sortList.find((obj) => obj.property === params.property)
       dispatch(
         setParams({
           ...params,
-          sortby,
+          sort,
         })
       )
       isSearch.current = true
