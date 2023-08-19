@@ -2,18 +2,18 @@ import { PayloadAction, createSlice } from "@reduxjs/toolkit"
 import { toast } from "react-toastify"
 import { RootState } from ".."
 
-export type CartItem = {
+export type ItemCart = {
   title: string
   imageUrl: string
   price: number
   count: number
   sizes: number
-  types: string
+  types: number
   id: string
 }
 
 interface CartSliceState {
-  items: CartItem[]
+  items: ItemCart[]
   totalPrice: number
 }
 
@@ -26,7 +26,7 @@ const cartSlice = createSlice({
   name: "cart",
   initialState,
   reducers: {
-    addItem(state, action: PayloadAction<CartItem>) {
+    addItem(state, action: PayloadAction<ItemCart>) {
       const findItem = state.items.find((obj) => obj.id === action.payload.id)
       if (findItem) {
         findItem.count++

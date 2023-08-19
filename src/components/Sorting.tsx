@@ -4,7 +4,7 @@ import { selectFilter, setSorting } from "../store/slices/filterSlice"
 
 type sortItem = {
   name: string
-  property: string
+  property: "rating" | "title" | "price" | "-rating" | "-title" | "-price"
 }
 type PopupClick = MouseEvent & {
   composedPath: Node[]

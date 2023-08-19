@@ -29,7 +29,7 @@ const CartItem: React.FC<CartItemProps> = ({
     dispatch(decrease(id))
   }
   const increaseHandler = () => {
-      dispatch(addItem(id))
+    dispatch(addItem(id)
   }
 
   return (

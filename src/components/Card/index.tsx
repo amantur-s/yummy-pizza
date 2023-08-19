@@ -1,7 +1,7 @@
 import React, { useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { Link } from "react-router-dom"
-import { CartItem, addItem, selectCartById } from "../../store/slices/cartSlice"
+import { ItemCart, addItem, selectCartById } from "../../store/slices/cartSlice"
 
 type CardProps = {
   title: string
@@ -32,7 +32,7 @@ const Card: React.FC<CardProps> = ({
   const typesName = ["Тонкое", "Традиционное"]
 
   const addItemHandler = () => {
-    const item: CartItem = {
+    const item: ItemCart = {
       id,
       title,
       price,
