@@ -23,14 +23,20 @@ export type PizzaItem = {
   rating: number
 }
 
+enum Status {
+    LOADING = 'loading',
+    SUCCESS = 'success',
+    ERROR = 'error'
+}
+
 interface ItemSliceState {
   data: PizzaItem[]
-  status: "loading" | "success" | "error"
+  status: Status
 }
 
 const initialState: ItemSliceState = {
   data: [],
-  status: "loading",
+  status: Status.LOADING,
 }
 
 const itemsSlice = createSlice({
@@ -43,15 +49,15 @@ const itemsSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder.addCase(fetchItems.pending, (state) => {
-      state.status = "loading"
+      state.status = Status.LOADING
       state.data = []
     })
     builder.addCase(fetchItems.fulfilled, (state, action) => {
       state.data = action.payload
-      state.status = "success"
+      state.status = Status.SUCCESS
     })
     builder.addCase(fetchItems.rejected, (state) => {
-      state.status = "error"
+      state.status = Status.ERROR
       state.data = []
     })
   },

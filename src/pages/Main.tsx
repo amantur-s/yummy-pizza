@@ -1,12 +1,13 @@
 import qs from "qs"
 import React, { useEffect, useRef } from "react"
-import { useDispatch, useSelector } from "react-redux"
+import { useSelector } from "react-redux"
 import { useNavigate } from "react-router-dom"
 import Skeleton from "../components/Card/Skeleton"
 import Card from "../components/Card/index"
 import Categories from "../components/Categories"
 import Sorting, { sortList } from "../components/Sorting"
 import "../scss/app.scss"
+import { useAppDispatch } from "../store"
 import {
   selectFilter,
   setCategory,
@@ -17,7 +18,7 @@ import { fetchItems, selectItems } from "../store/slices/itemsSlice"
 const Main: React.FC = () => {
   const { categoryId, searchValue, sort } = useSelector(selectFilter)
   const { data, status } = useSelector(selectItems)
-  const dispatch = useDispatch()
+  const dispatch = useAppDispatch()
   const navigate = useNavigate()
   const isSearch = useRef(false)
   const isMounted = useRef(false)
@@ -29,11 +30,11 @@ const Main: React.FC = () => {
   useEffect(() => {
     if (window.location.search) {
       const params = qs.parse(window.location.search.substring(1))
-      const sort = sortList.find((obj) => obj.property === params.property)
+      const sortObj = sortList.find((obj) => obj.property === params.property)
       dispatch(
         setParams({
           ...params,
-          sort,
+          sort: sortObj,
         })
       )
       isSearch.current = true
@@ -48,7 +49,6 @@ const Main: React.FC = () => {
         const order = sort.property.includes("-") ? "asc" : "desc"
 
         dispatch(
-          // @ts-ignore
           fetchItems({
             category,
             sortBy,

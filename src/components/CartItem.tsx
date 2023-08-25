@@ -22,14 +22,14 @@ const CartItem: React.FC<CartItemProps> = ({
 }) => {
   const dispatch = useDispatch()
 
-  const removeHandler = () => {
-    dispatch(removeItem(id))
+  const increaseHandler = () => {
+    dispatch(addItem({id}))
   }
   const decreaseHandler = () => {
     dispatch(decrease(id))
   }
-  const increaseHandler = () => {
-    dispatch(addItem(id)
+  const removeHandler = () => {
+    dispatch(removeItem(id))
   }
 
   return (

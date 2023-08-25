@@ -1,7 +1,7 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit"
 import { RootState } from ".."
 
-type Sort = {
+type tSort = {
   name: string
   property: "rating" | "title" | "price" | "-rating" | "-title" | "-price"
 }
@@ -9,7 +9,7 @@ type Sort = {
 interface FilterSliceState {
   categoryId: number
   searchValue: string
-  sort: Sort
+  sort: tSort
 }
 
 const initialState: FilterSliceState = {
@@ -28,7 +28,7 @@ const filterSlice = createSlice({
     setCategory(state, action: PayloadAction<number>) {
       state.categoryId = action.payload
     },
-    setSorting(state, action: PayloadAction<Sort>) {
+    setSorting(state, action: PayloadAction<tSort>) {
       state.sort = action.payload
     },
     setSearch(state, action: PayloadAction<string>) {

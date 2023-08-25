@@ -8,7 +8,7 @@ export type ItemCart = {
   price: number
   count: number
   sizes: number
-  types: number
+  types: string
   id: string
 }
 
@@ -42,7 +42,7 @@ const cartSlice = createSlice({
       }, 0)
     },
     decrease(state, action: PayloadAction<string>) {
-      const findItem = state.items.find((obj) => obj.id === action.payload.id)
+      const findItem = state.items.find((obj) => obj.id === action.payload) 
       if (findItem) {
         findItem.count--
         state.totalPrice = state.items.reduce((sum, obj) => {
